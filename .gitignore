@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# Data
+data/raw/
+data/processed/
+
+# Models
+models/trained_models/
+models/encoders/
+
+# Artifacts
+artifacts/
+
+# OS
+.DS_Store
+Thumbs.db

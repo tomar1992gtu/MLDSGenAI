@@ -1,0 +1,31 @@
+data:
+  file_name: customer_churn_dataset.csv
+  folder: raw
+  target_column: Churn
+  drop_columns:
+    - CustomerID
+
+feature_engineering:
+  categorical_columns:
+    - ContractType
+    - TechSupport
+    - Complaints
+
+feature_columns:
+  - Tenure
+  - MonthlyCharges
+  - TotalCharges
+  - ContractType
+  - TechSupport
+  - Complaints
+
+training:
+  test_size: 0.2
+  random_state: 42
+  scaler: minmax
+
+model:
+  name: GradientBoostingClassifier
+  task_type: Classification
+  params:
+    n_estimators: 100

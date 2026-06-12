@@ -1,0 +1,187 @@
+        ┌──────────────────────────────┐
+        │  START (main.py / pipeline)  │
+        └─────────────┬────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 1: Data Ingestion               |
+        │ src/ingestion/data_ingestion.py      |
+        │ DataIngestion.load_data()            │
+        │ → reads CSV from data/raw/           │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌─────────────────────────────────────────┐
+        │ STEP 2: Data Preprocessing              │
+        │ src/preprocessing/data_Preprocessing.py │
+        │ check nulls, duplicates, schema         │
+        └─────────────┬───────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 3: Data Validation              │
+        │ src/validation/data_validation.py    │
+        │ check nulls, duplicates, schema      │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌─────────────────────────────────────────────-┐
+        │ STEP 4: Feature Engineering                  │
+        │src/feature_engineering/feature_engineering.py│
+        │ - Encoding (OneHot/Label)                    │
+        │ - Transform categorical variables            │
+        └─────────────┬───────────────────────────────-┘
+                      │
+                      v
+        ┌───────────────────────────────────────────┐
+        │ STEP 5: Data Preparation(Train-Test Split)│
+        │ src/transformation/data_transformation.py │
+        │ - Split X, y (from params.yaml config)    │
+        │ - Drop Column                             │
+        └─────────────┬─────────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 6: Scaling                      │
+        │ src/transformation/scaling.py        │
+        │ MinMaxScaler / StandardScaler        │
+        │ (from params.yaml)                   │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 7: Model Selection              │
+        │ ModelFactory                         │
+        │ src/training/model_factory.py        │
+        │ RandomForest                         │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 8: Model Training               │
+        │ src/training/model_training.py       │
+        │ model.fit(X_train, y_train)          │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 9: Model Saving (Artifacts)     │
+        │ Saving Model in STEP 7 File          │
+        │ joblib.dump(model)                   │
+        │ → models/churn_model.pkl             │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 10: Model Evaluation            │
+        │ src/evaluation/evaluate.py           │
+        │ accuracy, precision, recall, f1      │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 11: Metrics Logging             │
+        │ Saving Model in STEP 10 File         │
+        │ Save to artifacts/metrics.json       │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 12: Pipeline Orchestration      │
+        │ pipelines/training_pipeline.py       │
+        │ (runs all steps automatically)       │
+        │ Models / Encoders / Scalers          │
+        │ Saved in artifacts + models          │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 13: Inference Pipeline          │
+        │ pipelines/inference_pipeline         │
+        │ complete prediction workflow         │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 14: API Layer (FastAPI)         │
+        │ app/schema_builder.py                │
+        │ api/routes.py                        │
+        │ app/main.py                          │
+        │ /predict endpoint                    │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 15: User Input Request          │
+        │ JSON input via API                   │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 16: Prediction Module           │
+        │ src/prediction/prediction_pipeline.py│
+        │ PredictionPipeline.predict()         │
+        │ loads saved model                    │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 17: Preprocessing in API        │
+        │ same encoding/scaling applied        │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 18: Model Inference             │
+        │ model.predict()                      │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+        ┌──────────────────────────────────────┐
+        │ STEP 19: Response Returned           │
+        └─────────────┬────────────────────────┘
+                      │
+                      v
+                 ┌────────┐
+                 │  END   │
+                 └────────┘
+
+
+'''
+Training Pipeline
+learns from data
+↓
+creates artifacts
+
+Inference Pipeline
+uses artifacts
+↓
+makes predictions
+'''
+
+
+
+
+
+
+20. Next Improvements
+
+After this project, learn:
+
+Hyperparameter tuning
+MLflow integration
+Docker deployment
+CI/CD
+Drift detection
+SHAP explainability
+Feature store
+RAG pipelines
+LLM fine-tuning
+Kubernetes deployment
+
+This churn project is already strong enough for:
+
+portfolio
+resume
+interviews
+intermediate ML engineering practice.

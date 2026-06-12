@@ -1,0 +1,28 @@
+data:
+  file_name: fetch_california_housing.xlsx
+  folder: raw
+  target_column: price
+  drop_columns: []
+
+feature_engineering:
+  categorical_columns: []
+
+feature_columns:
+  - MedInc
+  - HouseAge
+  - AveRooms
+  - AveBedrms
+  - Population
+  - AveOccup
+  - Latitude
+  - Longitude
+
+training:
+  test_size: 0.2
+  random_state: 42
+  scaler: standard
+
+model:
+  name: LinearRegression
+  task_type: Regression
+  params: {}
