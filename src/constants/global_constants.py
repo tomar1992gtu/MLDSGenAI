@@ -34,5 +34,5 @@ FEATURE_COLUMNS_DIR = os.path.join(ARTIFACTS_DIR, "feature_columns")
 CONFIG_DIR = os.path.join(PROJECT_ROOT, "configs")
 CONFIG_NAME = os.getenv("CONFIG_NAME")
 #CONFIG_NAME = "customer_churn_params.yaml"
-#CONFIG_NAME = "housing_params.yaml"
+CONFIG_NAME = "housing_params.yaml"
 CONFIG_PATH = os.path.join(CONFIG_DIR, CONFIG_NAME)

@@ -10,15 +10,14 @@ from src.logging.logger import logger
 
 class FeatureEngineering:
 
-    def __init__(self):
-        self.onehot_encoder = None
-        self.label_encoder = None
-        self.categorical_cols = None
+    onehot_encoder = None
+    label_encoder = None
 
     # -------------------------
     # 1. Encode INPUT FEATURES
     # -------------------------
-    def fit_features(self, df: pd.DataFrame, categorical_cols, model_name="model"):
+    @classmethod
+    def fit_features(cls, df: pd.DataFrame, categorical_cols, model_name="model"):
         try:
             logger.info("Feature Engineering Started")
             df = df.copy()
@@ -30,15 +29,15 @@ class FeatureEngineering:
             logger.info(f"Categorical Columns: {categorical_cols}")
 
             # Initialize encoder
-            self.onehot_encoder = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
+            cls.onehot_encoder = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
 
             # Fit + transform categorical
-            encoded = self.onehot_encoder.fit_transform(df[categorical_cols])
+            encoded = cls.onehot_encoder.fit_transform(df[categorical_cols])
 
             # Convert to DataFrame
             encoded_df = pd.DataFrame(
                 encoded,
-                columns=self.onehot_encoder.get_feature_names_out(categorical_cols),
+                columns=cls.onehot_encoder.get_feature_names_out(categorical_cols),
                 index=df.index
             )
             logger.info(f"Generated {len(encoded_df.columns)} encoded columns")
@@ -47,7 +46,7 @@ class FeatureEngineering:
             os.makedirs(ENCODER_DIR, exist_ok=True)
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             encoder_path = f"{ENCODER_DIR}/{model_name}_feature_encoder_{timestamp}.pkl"
-            joblib.dump(self.onehot_encoder, encoder_path)
+            joblib.dump(cls.onehot_encoder, encoder_path)
             logger.info(f"Feature encoder saved: {encoder_path}")
 
             # Drop original categorical columns
@@ -65,22 +64,23 @@ class FeatureEngineering:
     # -------------------------
     # 2. Encode TARGET COLUMN
     # -------------------------
-    def encode_target(self, df: pd.DataFrame, target_col: str, model_name="model"):
+    @classmethod
+    def encode_target(cls, df: pd.DataFrame, target_col: str, model_name="model"):
         try:
             df = df.copy()
             #target_col = target_col.lower().strip()
 
             logger.info(f"Target Encoding Started: {target_col}")
-            self.label_encoder = LabelEncoder()
-            df[target_col] = self.label_encoder.fit_transform(df[target_col])
+            cls.label_encoder = LabelEncoder()
+            df[target_col] = cls.label_encoder.fit_transform(df[target_col])
 
             # Save fitted target encoder
             os.makedirs(ENCODER_DIR, exist_ok=True)
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             encoder_path = f"{ENCODER_DIR}/{model_name}_target_encoder_{timestamp}.pkl"
-            joblib.dump(self.label_encoder, encoder_path)
+            joblib.dump(cls.label_encoder, encoder_path)
             logger.info(f"Target encoder saved: {encoder_path}")
-            logger.info(f"Target Classes: {list(self.label_encoder.classes_)}")
+            logger.info(f"Target Classes: {list(cls.label_encoder.classes_)}")
 
             return df
 
@@ -93,7 +93,8 @@ class FeatureEngineering:
     ##################################################
     # LOAD FEATURE ENCODER
     ##################################################
-    def load_latest_feature_encoder(self, model_name="model"):
+    @classmethod
+    def load_latest_feature_encoder(cls, model_name="model"):
         files = [f for f in os.listdir(ENCODER_DIR)
                 if f.startswith(f"{model_name}_feature_encoder") and f.endswith(".pkl")]
 
@@ -110,14 +111,15 @@ class FeatureEngineering:
     ##################################################
     # TRANSFORM FEATURES
     ##################################################
-    def transform_features(self, df, categorical_cols, model_name="model"):
+    @classmethod
+    def transform_features(cls, df, categorical_cols, model_name="model"):
         try:
             if not categorical_cols:
                 logger.info("No categorical columns found. Skipping transform.")
                 return df
 
             logger.info(f"Transforming categorical columns: {categorical_cols}")
-            encoder = self.load_latest_feature_encoder(model_name)
+            encoder = cls.load_latest_feature_encoder(model_name)
             encoded = encoder.transform(df[categorical_cols])
             encoded_df = pd.DataFrame(encoded, columns=encoder.get_feature_names_out(categorical_cols), index=df.index)
 

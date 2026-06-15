@@ -5,7 +5,8 @@ from src.logging.logger import logger
 
 class DataValidation:
 
-    def validate(self, df: pd.DataFrame, raise_error: bool = False):
+    @classmethod
+    def validate(cls, df: pd.DataFrame, raise_error: bool = False):
         try:
             logger.info("Data Validation Started")
             errors = []

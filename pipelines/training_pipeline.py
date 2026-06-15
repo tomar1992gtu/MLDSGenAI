@@ -42,9 +42,8 @@ class TrainingPipeline:
             ###################################
             # STEP 1: DATA INGESTION
             ###################################
-            ingestion = DataIngestion()
             logger.info("STEP 1 - Data Ingestion Started")
-            df = ingestion.load_data(file_name=self.config["data"]["file_name"],
+            df = DataIngestion.load_data(file_name=self.config["data"]["file_name"],
                                      folder=self.config["data"].get("folder", "raw"))
             logger.info(f"Dataset Loaded Successfully. Shape={df.shape}")
 
@@ -58,9 +57,8 @@ class TrainingPipeline:
             ###################################
             # STEP 3: VALIDATION
             ###################################
-            validator = DataValidation()
             logger.info("STEP 3 - Data Validation Started")
-            validation = validator.validate(df)
+            validation = DataValidation.validate(df)
 
             if validation["status"] == "failed":
                 raise ValueError(f"Validation Failed: {validation}")
@@ -79,9 +77,8 @@ class TrainingPipeline:
             ###################################
             # STEP 5: TRAIN TEST SPLIT
             ###################################
-            splitter = DataTransformation()
             logger.info("STEP 5 - Train Test Split Started")
-            X_train, X_test, y_train, y_test = splitter.prepare_and_split(
+            X_train, X_test, y_train, y_test = DataTransformation.prepare_and_split(
                     df=df, target_column=target, drop_columns=drop_columns, task_type=task_type,
                     test_size=self.config["training"].get("test_size"),
                     random_state=self.config["training"].get("random_state"))

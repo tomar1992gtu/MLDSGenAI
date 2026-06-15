@@ -7,7 +7,7 @@ class DataPreprocessing:
 
     @classmethod
     def preprocess(cls, df: pd.DataFrame, remove_duplicates=True, strip_columns=True, fill_missing=True):
-        try :
+        try:
             logger.info("Data Preprocessing Started")
             df = df.copy()
 

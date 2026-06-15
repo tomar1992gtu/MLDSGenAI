@@ -1,0 +1,73 @@
+2026-06-15 19:31:11,833 - INFO - =====>>> Starting Training Pipeline <<======
+2026-06-15 19:31:11,833 - INFO - Loading configuration: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\configs\housing_params.yaml
+2026-06-15 19:31:11,836 - INFO - Configuration loaded successfully
+2026-06-15 19:31:11,836 - INFO - Model: LinearRegression | Task: Regression
+2026-06-15 19:31:11,836 - INFO - STEP 1 - Data Ingestion Started
+2026-06-15 19:31:11,836 - INFO - DataIngestion Started
+2026-06-15 19:31:11,836 - INFO - Loading file: raw/fetch_california_housing.xlsx
+2026-06-15 19:31:14,350 - INFO - Rows Loaded: 20640
+2026-06-15 19:31:14,350 - INFO - Columns Loaded: ['MedInc', 'HouseAge', 'AveRooms', 'AveBedrms', 'Population', 'AveOccup', 'Latitude', 'Longitude', 'price']
+2026-06-15 19:31:14,351 - INFO - DataIngestion Finished
+2026-06-15 19:31:14,351 - INFO - Dataset Loaded Successfully. Shape=(20640, 9)
+2026-06-15 19:31:14,351 - INFO - STEP 2 - Data Preprocessing Started
+2026-06-15 19:31:14,351 - INFO - Data Preprocessing Started
+2026-06-15 19:31:14,352 - INFO - Initial Shape: (20640, 9)
+2026-06-15 19:31:14,352 - INFO - Standardizing column names
+2026-06-15 19:31:14,539 - INFO - Duplicate rows removed: 0
+2026-06-15 19:31:14,539 - INFO - Handling missing values
+2026-06-15 19:31:14,542 - INFO - Final Shape: (20640, 9)
+2026-06-15 19:31:14,542 - INFO - Data Preprocessing Completed Successfully
+2026-06-15 19:31:14,543 - INFO - Preprocessing Completed. Shape=(20640, 9)
+2026-06-15 19:31:14,543 - INFO - STEP 3 - Data Validation Started
+2026-06-15 19:31:14,543 - INFO - Data Validation Started
+2026-06-15 19:31:14,544 - INFO - No missing values found
+2026-06-15 19:31:14,552 - INFO - No duplicate rows found
+2026-06-15 19:31:14,552 - INFO - DataFrame contains 20640 rows and 9 columns
+2026-06-15 19:31:14,552 - INFO - Validation Status: passed
+2026-06-15 19:31:14,552 - INFO - Data Validation Completed
+2026-06-15 19:31:14,552 - INFO - Validation Status: passed
+2026-06-15 19:31:14,552 - INFO - STEP 4 - Feature Engineering Started
+2026-06-15 19:31:14,552 - INFO - Feature Engineering Started
+2026-06-15 19:31:14,553 - INFO - No categorical columns found. Skipping feature encoding.
+2026-06-15 19:31:14,553 - INFO - Feature Engineering Completed. Shape=(20640, 9)
+2026-06-15 19:31:14,553 - INFO - STEP 5 - Train Test Split Started
+2026-06-15 19:31:14,553 - INFO - Data Transformation Started
+2026-06-15 19:31:14,553 - INFO - Target Column: price
+2026-06-15 19:31:14,553 - INFO - Drop Columns: []
+2026-06-15 19:31:14,555 - INFO - Feature Shape Before Split: (20640, 8)
+2026-06-15 19:31:14,555 - INFO - Target Shape Before Split: (20640,)
+2026-06-15 19:31:14,562 - INFO - X_train Shape: (16512, 8)
+2026-06-15 19:31:14,562 - INFO - X_test Shape: (4128, 8)
+2026-06-15 19:31:14,562 - INFO - y_train Shape: (16512,)
+2026-06-15 19:31:14,562 - INFO - y_test Shape: (4128,)
+2026-06-15 19:31:14,562 - INFO - Data Transformation Completed Successfully
+2026-06-15 19:31:14,562 - INFO - X_train=(16512, 8), X_test=(4128, 8)
+2026-06-15 19:31:14,563 - INFO - Saving Feature Columns: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\artifacts\feature_columns\LinearRegression_feature_columns.pkl
+2026-06-15 19:31:14,563 - INFO - STEP 6 - Feature Scaling Started
+2026-06-15 19:31:14,563 - INFO - Scaling Started | Scaler: standard
+2026-06-15 19:31:14,563 - INFO - Training Shape Before Scaling: (16512, 8)
+2026-06-15 19:31:14,568 - INFO - Scaler fitted successfully
+2026-06-15 19:31:14,570 - INFO - Scaler Saved: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\artifacts\encoders\LinearRegression_scaler_20260615_193114.pkl
+2026-06-15 19:31:14,570 - INFO - Scaling Completed Successfully
+2026-06-15 19:31:14,570 - INFO - Applying scaler on shape: (4128, 8)
+2026-06-15 19:31:14,571 - INFO - Scaling Transformation Completed
+2026-06-15 19:31:14,573 - INFO - Scaler Saved: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\artifacts\encoders\LinearRegression_scaler_20260615_193114.pkl
+2026-06-15 19:31:14,573 - INFO - Creating Model: LinearRegression
+2026-06-15 19:31:14,573 - INFO - STEP 7 - Model Training Started
+2026-06-15 19:31:14,573 - INFO - Creating Model | Name=LinearRegression | Task=Regression
+2026-06-15 19:31:14,573 - INFO - Hyperparameters={}
+2026-06-15 19:31:14,573 - INFO - Model Created Successfully: LinearRegression
+2026-06-15 19:31:14,573 - INFO - STEP 8 - Model Evaluation Started
+2026-06-15 19:31:14,573 - INFO - Model Training Started: LinearRegression
+2026-06-15 19:31:14,573 - INFO - Training Features Shape: (16512, 8)
+2026-06-15 19:31:14,573 - INFO - Training Target Shape: (16512,)
+2026-06-15 19:31:14,763 - INFO - Training Completed Successfully: LinearRegression
+2026-06-15 19:31:14,765 - INFO - Model Saved Successfully: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\models\trained_models/LinearRegression_20260615_193114.pkl
+2026-06-15 19:31:14,766 - INFO - Model Saved: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\models\trained_models/LinearRegression_20260615_193114.pkl
+2026-06-15 19:31:14,766 - INFO - Regression Evaluation Started: LinearRegression
+2026-06-15 19:31:14,766 - INFO - Test Shape: (4128, 8)
+2026-06-15 19:31:14,798 - INFO - Regression Metrics: {'rmse': 0.7455813830127763, 'r2_score': 0.5757877060324508}
+2026-06-15 19:31:14,817 - INFO - Metrics Saved: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\artifacts\metrics/LinearRegression_metrics_20260615_193114.json
+2026-06-15 19:31:14,817 - INFO - Regression Evaluation Completed
+2026-06-15 19:31:14,817 - INFO - STEP 9 - Metrics: {'rmse': 0.7455813830127763, 'r2_score': 0.5757877060324508}
+2026-06-15 19:31:14,818 - INFO - Training Pipeline Completed Successfully

@@ -5,7 +5,8 @@ from src.logging.logger import logger
 
 class DataTransformation:
 
-    def prepare_and_split(self, df, target_column, task_type, drop_columns=None, test_size=0.2, random_state=42):
+    @classmethod
+    def prepare_and_split(cls, df, target_column, task_type, drop_columns=None, test_size=0.2, random_state=42):
         try:
             logger.info("Data Transformation Started")
             if drop_columns is None:

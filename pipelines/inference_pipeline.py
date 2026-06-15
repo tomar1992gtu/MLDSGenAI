@@ -42,7 +42,6 @@ class InferencePipeline:
             #################################
             # STEP 3 Feature Engineering
             #################################
-            fe = FeatureEngineering()
             if self.categorical_columns:
                 missing_cols = [
                     col for col in self.categorical_columns
@@ -52,7 +51,7 @@ class InferencePipeline:
                     logger.warning(f"Skipping Feature Encoding. Missing columns: {missing_cols}")
                 else:
                     logger.info(f"Applying Feature Encoding on: {self.categorical_columns}")
-                    df = fe.transform_features(
+                    df = FeatureEngineering.transform_features(
                         df=df,
                         categorical_cols=self.categorical_columns,
                         model_name=self.model_name

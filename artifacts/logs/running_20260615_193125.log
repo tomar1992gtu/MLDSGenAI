@@ -1,0 +1,32 @@
+2026-06-15 19:31:26,164 - INFO - InferencePipeline Initialized | Model=LinearRegression
+2026-06-15 19:31:26,164 - INFO - =====>>> Starting Inference Pipeline <<======
+2026-06-15 19:31:26,164 - INFO - STEP 1 - Input Conversion Started
+2026-06-15 19:31:26,165 - INFO - Input Shape: (1, 8)
+2026-06-15 19:31:26,165 - INFO - STEP 2 - Data Preprocessing Started
+2026-06-15 19:31:26,165 - INFO - Data Preprocessing Started
+2026-06-15 19:31:26,166 - INFO - Initial Shape: (1, 8)
+2026-06-15 19:31:26,166 - INFO - Standardizing column names
+2026-06-15 19:31:26,167 - INFO - Duplicate rows removed: 0
+2026-06-15 19:31:26,167 - INFO - Handling missing values
+2026-06-15 19:31:26,169 - INFO - Final Shape: (1, 8)
+2026-06-15 19:31:26,169 - INFO - Data Preprocessing Completed Successfully
+2026-06-15 19:31:26,169 - INFO - Preprocessing Completed. Shape=(1, 8)
+2026-06-15 19:31:26,169 - INFO - STEP 4 - Feature Alignment Started
+2026-06-15 19:31:26,169 - INFO - Loaded Feature Columns File: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\artifacts\feature_columns\LinearRegression_feature_columns.pkl
+2026-06-15 19:31:26,169 - INFO - Aligned Feature Shape: (1, 8)
+2026-06-15 19:31:26,169 - INFO - STEP 5 - Feature Scaling Started
+2026-06-15 19:31:26,169 - INFO - Loading Scaler: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\artifacts\encoders\LinearRegression_scaler_20260615_193114.pkl
+2026-06-15 19:31:26,170 - INFO - Scaler Loaded Successfully
+2026-06-15 19:31:26,170 - INFO - Applying scaler on shape: (1, 8)
+2026-06-15 19:31:26,172 - INFO - Scaling Transformation Completed
+2026-06-15 19:31:26,173 - INFO - Scaling Completed. Shape=(1, 8)
+2026-06-15 19:31:26,173 - INFO - STEP 6 - Prediction Started
+2026-06-15 19:31:26,173 - INFO - Prediction started for model: LinearRegression
+2026-06-15 19:31:26,173 - INFO - Input shape: (1, 8)
+2026-06-15 19:31:26,173 - INFO - Searching model: LinearRegression
+2026-06-15 19:31:26,173 - INFO - Loading model from D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\models\trained_models\LinearRegression_20260615_193114.pkl
+2026-06-15 19:31:26,251 - INFO - Model loaded successfully
+2026-06-15 19:31:26,252 - INFO - Prediction generated: [2.4010768507980353]
+2026-06-15 19:31:26,252 - INFO - Prediction completed successfully
+2026-06-15 19:31:26,252 - INFO - Prediction Result: {'prediction': [2.4010768507980353]}
+2026-06-15 19:31:26,252 - INFO - Inference Pipeline Completed Successfully

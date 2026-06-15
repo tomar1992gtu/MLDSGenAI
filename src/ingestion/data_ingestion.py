@@ -6,7 +6,8 @@ from src.constants.global_constants import DATA_DIR, RAW_DATA_DIR
 
 class DataIngestion:
 
-    def load_data(self, file_name, folder=RAW_DATA_DIR):
+    @classmethod
+    def load_data(cls, file_name, folder=RAW_DATA_DIR):
         try :
             # Full file path
             logger.info("DataIngestion Started")
