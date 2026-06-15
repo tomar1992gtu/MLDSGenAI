@@ -1,197 +1,380 @@
-# 📊 Data Science Project – End-to-End ML Pipeline
+# 📊 MLDSGenAI – End-to-End Machine Learning Framework
 
-This repository contains an **end-to-end data science pipeline** designed to handle multiple machine learning use cases.
-Currently, it supports:
+A configurable and reusable Machine Learning framework for building, training, evaluating, and deploying both **Regression** and **Classification** models.
 
-* 🏠 **California Housing Price Prediction**
+The framework follows a modular architecture and supports:
+
+* Data Ingestion
+* Data Validation
+* Data Preprocessing
+* Feature Engineering
+* Feature Scaling
+* Model Training
+* Model Evaluation
+* Model Persistence
+* Prediction APIs using FastAPI
+* Logging & Monitoring of Pipeline Execution
 
 ---
 
-## 📁 Project Structure
+# 🚀 Supported Use Cases
 
-```
+## Classification
+
+Examples:
+
+* Customer Churn Prediction
+* Loan Approval Prediction
+* Employee Attrition Prediction
+* Titanic Survival Prediction
+
+## Regression
+
+Examples:
+
+* California Housing Price Prediction
+* House Price Prediction
+* Sales Forecasting
+* Demand Prediction
+
+---
+
+# 📂 Project Structure
+
+```text
 MLDSGenAI/
 │
-├── data/                           # Stores all datasets used throughout the project
-│   ├── raw/                        # Original untouched data collected from sources
-│   ├── external/                   # Third-party or externally obtained datasets
-│   └── processed/                  # Cleaned and transformed datasets ready for modeling
+├── app/
+│   ├── api/
+│   │   └── routes.py
+│   ├── schemas/
+│   │   └── schema_builder.py
+│   └── main.py
 │
-├── configs/                        # Configuration files for different projects/models
-│   ├── base.yaml                   # Common configuration shared across projects
-│   ├── housing.yaml                # Housing project specific configuration
-│   ├── titanic.yaml                # Titanic project specific configuration
+├── configs/
+│   └── config.yaml
 │
-├── src/                            # Core source code of the framework
-│   ├── constants/                  # Define Constants Values
-│   ├── common_lib/                 # Define Reusable methods
-│   ├── ingestion/                  # Data collection and loading logic
-│   ├── preprocessing/              # Data Preprocessing
-│   ├── validation/                 # Data validation and schema checking
-│   ├── transformation/             # Data cleaning and preprocessing logic
-│   ├── feature_engineering/        # Feature creation and selection logic
-│   ├── training/                   # Model training related components
-│   ├── evaluation/                 # Model evaluation and performance analysis
-│   ├── inference/                  # Prediction and inference related logic
-│   ├── monitoring/                 # Monitoring model performance and drift
-│   ├── registry/                   # Model registration and version management
-│   ├── logging/                    # Logging utilities and configurations
-│   ├── exceptions/                 # Custom exception handling classes
-│   └── utils/                      # Reusable helper functions and utilities
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── external/
 │
-├── pipelines/                      # End-to-end workflow orchestration
-│   ├── training_pipeline.py        # Complete training workflow pipeline
-│   └── inference_pipeline.py       # Complete inference workflow pipeline
+├── pipelines/
+│   ├── training_pipeline.py
+│   └── inference_pipeline.py
 │
-├── app/                            # Application layer for deployment/services
-│   ├── api/                        # API routes and endpoint definitions
-│   ├── services/                   # Business logic and service layer
-│   └── main.py                     # Application entry point
+├── src/
+│   ├── constants/
+│   ├── ingestion/
+│   ├── preprocessing/
+│   ├── validation/
+│   ├── feature_engineering/
+│   ├── transformation/
+│   ├── training/
+│   ├── evaluation/
+│   ├── prediction/
+│   └── logging/
 │
-├── experiments/                    # Experimental work, research, and trials
+├── artifacts/
+│   ├── trained_models/
+│   ├── encoders/
+│   ├── metrics/
+│   ├── logs/
+│   └── feature_columns/
 │
-├── artifacts/                      # Generated outputs and project artifacts
-│   ├── metrics/                    # Saved evaluation metrics
-│   ├── reports/                    # Generated reports and summaries
-│
-├── models/                         # Stores trained model related files
-│   ├── trained_models/             # Serialized trained models
-│   ├── encoders/                   # Saved encoders and preprocessing objects
-│
-├── tests/                          # Unit tests and integration tests
-│
-├── requirements.txt                # Project dependencies
-├── README.md                       # Project documentation
-└── main.py                         # Main execution entry point
-
+├── requirements.txt
+├── README.md
+└── main.py
 ```
 
 ---
 
-## 🔧 Features
+# ⚙️ Framework Workflow
 
-✔ Modular & scalable architecture
-✔ Config-driven pipeline (YAML-based)
-✔ Supports regression & classification
-✔ Automated data validation
-✔ Feature scaling & encoding
-✔ Model factory pattern
-✔ Evaluation metrics & comparison
-✔ Model & data drift monitoring
-✔ API-ready for deployment
+```text
+Raw Dataset
+      │
+      ▼
+Data Ingestion
+      │
+      ▼
+Data Preprocessing
+      │
+      ▼
+Data Validation
+      │
+      ▼
+Feature Engineering
+      │
+      ▼
+Train/Test Split
+      │
+      ▼
+Feature Scaling
+      │
+      ▼
+Model Training
+      │
+      ▼
+Model Evaluation
+      │
+      ▼
+Artifact Storage
+      │
+      ▼
+Prediction API
+```
 
 ---
 
-## 🏠 California Housing Project
+# 🔧 Features
 
-**Goal:** Predict median house prices based on demographic and geographic features.
+### Data Ingestion
 
-**Key Techniques:**
+Supports loading:
 
-* Linear & non-linear regression models
-* Feature scaling and multicollinearity handling (VIF)
-* Model evaluation using RMSE, MAE, R²
-
----
-
-## ⚙️ Configuration Management
-
-All experiments are **config-driven** using YAML files:
-
-* `params.yaml` → model & training parameters
-* `schema.yaml` → TBC === data schema & validation rules
-* `default.yaml` → TBC === shared global settings
-
-This allows easy experimentation without changing code.
+* CSV
+* Excel (.xlsx)
+* JSON
+* Parquet
 
 ---
 
-## 🚀 Running the Training Pipeline
+### Data Preprocessing
+
+Automatically handles:
+
+* Column name standardization
+* Duplicate removal
+* Missing value treatment
+* String cleaning
+
+---
+
+### Data Validation
+
+Validates:
+
+* Missing values
+* Duplicate rows
+* Empty datasets
+
+---
+
+### Feature Engineering
+
+Supports:
+
+* One-Hot Encoding
+* Label Encoding
+* Feature persistence for inference
+
+---
+
+### Feature Scaling
+
+Available scalers:
+
+* StandardScaler
+* MinMaxScaler
+* RobustScaler
+
+Saved automatically and reused during inference.
+
+---
+
+### Model Factory
+
+Supports multiple models.
+
+#### Regression Models
+
+* LinearRegression
+* Ridge
+* Lasso
+* ElasticNet
+* DecisionTreeRegressor
+* RandomForestRegressor
+* GradientBoostingRegressor
+* KNeighborsRegressor
+* SVR
+* MLPRegressor
+* XGBRegressor
+
+#### Classification Models
+
+* LogisticRegression
+* DecisionTreeClassifier
+* RandomForestClassifier
+* GradientBoostingClassifier
+* AdaBoostClassifier
+* KNeighborsClassifier
+* SVC
+* MLPClassifier
+* GaussianNB
+* XGBClassifier
+
+---
+
+### Model Evaluation
+
+#### Classification Metrics
+
+* Accuracy
+* Precision
+* Recall
+* F1 Score
+
+#### Regression Metrics
+
+* RMSE
+* R² Score
+
+Metrics are automatically saved as JSON artifacts.
+
+---
+
+### Logging
+
+Every pipeline step is logged.
+
+Example:
+
+```text
+2026-06-15 12:45:10 - INFO - Data Ingestion Started
+2026-06-15 12:45:12 - INFO - Dataset Loaded Successfully
+2026-06-15 12:45:14 - INFO - Model Training Started
+2026-06-15 12:45:18 - INFO - Model Saved Successfully
+```
+
+Logs are stored in:
+
+```text
+artifacts/logs/
+```
+
+---
+
+# 📄 Configuration Driven Architecture
+
+All pipeline behavior is controlled through YAML configuration.
+
+Example:
+
+```yaml
+data:
+  file_name: customer_churn.xlsx
+  target_column: churn
+
+feature_engineering:
+  categorical_columns:
+    - contracttype
+    - techsupport
+
+training:
+  test_size: 0.2
+  random_state: 42
+  scaler: standard
+
+model:
+  name: RandomForestClassifier
+  task_type: Classification
+```
+
+No code changes are required to switch models or datasets.
+
+---
+
+# 🚀 Run Training Pipeline
 
 ```bash
-python pipelines/training_pipeline.py
-```
-
-The pipeline will:
-
-1. Ingest raw data
-2. Validate schema
-3. Transform features
-4. Train model
-5. Evaluate performance
-6. Save artifacts
-
----
-
-## 📈 Monitoring
-
-* **Data Drift:** Detects changes in incoming data distribution
-* **Model Drift:** Monitors degradation in model performance
-
-Located in:
-
-```
-monitoring/
-├── data_drift.py
-└── model_drift.py
+python main.py --mode train --config configs/config.yaml
 ```
 
 ---
 
-## 🌐 API Deployment
+# 🔮 Run Inference Pipeline
 
-A simple inference API is available:
-
+```bash
+python main.py --mode predict --config configs/config.yaml
 ```
-app/api.py
-```
-
-This can be extended using **FastAPI** or **Flask** for real-time predictions.
 
 ---
 
-## 📦 Artifacts
+# 🌐 Start FastAPI Server
 
-All trained models, encoders, and scalers are stored in:
-
+```bash
+uvicorn app.main:app --reload
 ```
+
+Swagger UI:
+
+```text
+http://127.0.0.1:8000/docs
+```
+
+---
+
+# 📦 Generated Artifacts
+
+```text
 artifacts/
-├── housing/
-└── titanic/
+│
+├── trained_models/
+├── encoders/
+├── metrics/
+├── logs/
+└── feature_columns/
 ```
 
-Versioning ensures reproducibility and traceability.
+Each training run automatically stores:
+
+* Model
+* Encoders
+* Scalers
+* Metrics
+* Feature Columns
+* Logs
 
 ---
 
-## 🛠 Tech Stack
+# 🛠 Tech Stack
 
 * Python
-* Pandas, NumPy
+* Pandas
+* NumPy
 * Scikit-Learn
+* XGBoost
+* FastAPI
+* Pydantic
+* Joblib
 * YAML
-* Matplotlib / Seaborn
-* FastAPI / Flask (optional)
 
 ---
 
-## 📌 Future Enhancements
+# 🔮 Future Enhancements
 
-* MLflow integration
-* CI/CD pipelines
-* Docker support
-* Cloud deployment (AWS / GCP / Azure)
-* Automated hyperparameter tuning
-
----
-
-## 👤 Author
-
-**Jitendra TOMAR**
-Data Scientist | Machine Learning Engineer
+* MLflow Integration
+* Docker Support
+* CI/CD Pipelines
+* Hyperparameter Tuning
+* Feature Store
+* Model Registry
+* Cloud Deployment (AWS / Azure / GCP)
 
 ---
 
-## 📄 License
+# 👨‍💻 Author
 
-This project is licensed under the **MIT License**.
+**Jitendra Tomar**
+
+Machine Learning | Data Science | Generative AI
+
+GitHub:
+https://github.com/gtu12tomar
+
+---
+
+# 📜 License
+
+This project is licensed under the MIT License.

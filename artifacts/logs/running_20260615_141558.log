@@ -1,0 +1,82 @@
+2026-06-15 14:15:59,026 - INFO - =====>>> Starting Training Pipeline <<======
+2026-06-15 14:15:59,026 - INFO - Loading configuration: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\configs\customer_churn_params.yaml
+2026-06-15 14:15:59,029 - INFO - Configuration loaded successfully
+2026-06-15 14:15:59,029 - INFO - Model: GradientBoostingClassifier | Task: Classification
+2026-06-15 14:15:59,029 - INFO - STEP 1 - Data Ingestion Started
+2026-06-15 14:15:59,029 - INFO - DataIngestion Started
+2026-06-15 14:15:59,029 - INFO - Loading file: raw/customer_churn_dataset.csv
+2026-06-15 14:15:59,032 - INFO - Rows Loaded: 58
+2026-06-15 14:15:59,032 - INFO - Columns Loaded: ['CustomerID', 'Tenure', 'MonthlyCharges', 'TotalCharges', 'ContractType', 'TechSupport', 'Complaints', 'Churn']
+2026-06-15 14:15:59,032 - INFO - DataIngestion Finished
+2026-06-15 14:15:59,032 - INFO - Dataset Loaded Successfully. Shape=(58, 8)
+2026-06-15 14:15:59,032 - INFO - STEP 2 - Data Preprocessing Started
+2026-06-15 14:15:59,032 - INFO - Data Preprocessing Started
+2026-06-15 14:15:59,032 - INFO - Initial Shape: (58, 8)
+2026-06-15 14:15:59,032 - INFO - Standardizing column names
+2026-06-15 14:15:59,034 - INFO - Duplicate rows removed: 8
+2026-06-15 14:15:59,035 - INFO - Handling missing values
+2026-06-15 14:15:59,039 - INFO - Final Shape: (50, 8)
+2026-06-15 14:15:59,039 - INFO - Data Preprocessing Completed Successfully
+2026-06-15 14:15:59,039 - INFO - Preprocessing Completed. Shape=(50, 8)
+2026-06-15 14:15:59,039 - INFO - STEP 3 - Data Validation Started
+2026-06-15 14:15:59,039 - INFO - Data Validation Started
+2026-06-15 14:15:59,040 - INFO - No missing values found
+2026-06-15 14:15:59,041 - INFO - No duplicate rows found
+2026-06-15 14:15:59,041 - INFO - DataFrame contains 50 rows and 8 columns
+2026-06-15 14:15:59,041 - INFO - Validation Status: passed
+2026-06-15 14:15:59,041 - INFO - Data Validation Completed
+2026-06-15 14:15:59,041 - INFO - Validation Status: passed
+2026-06-15 14:15:59,041 - INFO - STEP 4 - Feature Engineering Started
+2026-06-15 14:15:59,041 - INFO - Feature Engineering Started
+2026-06-15 14:15:59,042 - INFO - Categorical Columns: ['contracttype', 'techsupport', 'complaints']
+2026-06-15 14:15:59,044 - INFO - Generated 7 encoded columns
+2026-06-15 14:15:59,045 - INFO - Feature encoder saved: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\models\encoders/GradientBoostingClassifier_feature_encoder_20260615_141559.pkl
+2026-06-15 14:15:59,046 - INFO - Feature Engineering Completed. Shape: (50, 12)
+2026-06-15 14:15:59,046 - INFO - Target Encoding Started: churn
+2026-06-15 14:15:59,048 - INFO - Target encoder saved: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\models\encoders/GradientBoostingClassifier_target_encoder_20260615_141559.pkl
+2026-06-15 14:15:59,048 - INFO - Target Classes: ['No', 'Yes']
+2026-06-15 14:15:59,048 - INFO - Feature Engineering Completed. Shape=(50, 12)
+2026-06-15 14:15:59,048 - INFO - STEP 5 - Train Test Split Started
+2026-06-15 14:15:59,048 - INFO - Data Transformation Started
+2026-06-15 14:15:59,048 - INFO - Target Column: churn
+2026-06-15 14:15:59,048 - INFO - Drop Columns: ['customerid']
+2026-06-15 14:15:59,048 - INFO - Feature Shape Before Split: (50, 10)
+2026-06-15 14:15:59,049 - INFO - Target Shape Before Split: (50,)
+2026-06-15 14:15:59,049 - INFO - Using Stratified Train-Test Split
+2026-06-15 14:15:59,049 - INFO - Class Distribution:
+{0: 38, 1: 12}
+2026-06-15 14:15:59,050 - INFO - X_train Shape: (40, 10)
+2026-06-15 14:15:59,051 - INFO - X_test Shape: (10, 10)
+2026-06-15 14:15:59,051 - INFO - y_train Shape: (40,)
+2026-06-15 14:15:59,051 - INFO - y_test Shape: (10,)
+2026-06-15 14:15:59,051 - INFO - Data Transformation Completed Successfully
+2026-06-15 14:15:59,051 - INFO - X_train=(40, 10), X_test=(10, 10)
+2026-06-15 14:15:59,051 - INFO - Saving Feature Columns: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\artifacts\feature_columns\GradientBoostingClassifier_feature_columns.pkl
+2026-06-15 14:15:59,051 - INFO - STEP 6 - Feature Scaling Started
+2026-06-15 14:15:59,051 - INFO - Scaling Started | Scaler: minmax
+2026-06-15 14:15:59,052 - INFO - Training Shape Before Scaling: (40, 10)
+2026-06-15 14:15:59,054 - INFO - Scaler fitted successfully
+2026-06-15 14:15:59,055 - INFO - Scaler Saved: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\artifacts\encoders\GradientBoostingClassifier_scaler_20260615_141559.pkl
+2026-06-15 14:15:59,055 - INFO - Scaling Completed Successfully
+2026-06-15 14:15:59,055 - INFO - Applying scaler on shape: (10, 10)
+2026-06-15 14:15:59,056 - INFO - Scaling Transformation Completed
+2026-06-15 14:15:59,057 - INFO - Scaler Saved: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\artifacts\encoders\GradientBoostingClassifier_scaler_20260615_141559.pkl
+2026-06-15 14:15:59,058 - INFO - Creating Model: GradientBoostingClassifier
+2026-06-15 14:15:59,058 - INFO - STEP 7 - Model Training Started
+2026-06-15 14:15:59,058 - INFO - Creating Model | Name=GradientBoostingClassifier | Task=Classification
+2026-06-15 14:15:59,058 - INFO - Hyperparameters={'n_estimators': 100}
+2026-06-15 14:15:59,058 - INFO - Model Created Successfully: GradientBoostingClassifier
+2026-06-15 14:15:59,058 - INFO - STEP 8 - Model Evaluation Started
+2026-06-15 14:15:59,058 - INFO - Model Training Started: GradientBoostingClassifier
+2026-06-15 14:15:59,058 - INFO - Training Features Shape: (40, 10)
+2026-06-15 14:15:59,058 - INFO - Training Target Shape: (40,)
+2026-06-15 14:15:59,124 - INFO - Training Completed Successfully: GradientBoostingClassifier
+2026-06-15 14:15:59,129 - INFO - Model Saved Successfully: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\models\trained_models/GradientBoostingClassifier_20260615_141559.pkl
+2026-06-15 14:15:59,129 - INFO - Model Saved: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\models\trained_models/GradientBoostingClassifier_20260615_141559.pkl
+2026-06-15 14:15:59,129 - INFO - Classification Evaluation Started: GradientBoostingClassifier
+2026-06-15 14:15:59,129 - INFO - Test Shape: (10, 10)
+2026-06-15 14:15:59,135 - INFO - Classification Metrics: {'accuracy': 0.6, 'precision': 0.6, 'recall': 0.6, 'f1_score': 0.6}
+2026-06-15 14:15:59,136 - INFO - Metrics Saved: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\artifacts\metrics/GradientBoostingClassifier_metrics_20260615_141559.json
+2026-06-15 14:15:59,136 - INFO - Classification Evaluation Completed
+2026-06-15 14:15:59,136 - INFO - STEP 9 - Metrics: {'accuracy': 0.6, 'precision': 0.6, 'recall': 0.6, 'f1_score': 0.6}
+2026-06-15 14:15:59,136 - INFO - Training Pipeline Completed Successfully

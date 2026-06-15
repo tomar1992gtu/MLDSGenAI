@@ -1,0 +1,34 @@
+2026-06-15 14:16:30,260 - INFO - InferencePipeline Initialized | Model=GradientBoostingClassifier
+2026-06-15 14:16:30,260 - INFO - =====>>> Starting Inference Pipeline <<======
+2026-06-15 14:16:30,260 - INFO - STEP 1 - Input Conversion Started
+2026-06-15 14:16:30,261 - INFO - Input Shape: (1, 8)
+2026-06-15 14:16:30,261 - INFO - STEP 2 - Data Preprocessing Started
+2026-06-15 14:16:30,261 - INFO - Data Preprocessing Started
+2026-06-15 14:16:30,261 - INFO - Initial Shape: (1, 8)
+2026-06-15 14:16:30,261 - INFO - Standardizing column names
+2026-06-15 14:16:30,262 - INFO - Duplicate rows removed: 0
+2026-06-15 14:16:30,263 - INFO - Handling missing values
+2026-06-15 14:16:30,264 - INFO - Final Shape: (1, 8)
+2026-06-15 14:16:30,265 - INFO - Data Preprocessing Completed Successfully
+2026-06-15 14:16:30,265 - INFO - Preprocessing Completed. Shape=(1, 8)
+2026-06-15 14:16:30,265 - WARNING - Skipping Feature Encoding. Missing columns: ['contracttype', 'techsupport', 'complaints']
+2026-06-15 14:16:30,265 - INFO - STEP 4 - Feature Alignment Started
+2026-06-15 14:16:30,265 - INFO - Loaded Feature Columns File: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\artifacts\feature_columns\GradientBoostingClassifier_feature_columns.pkl
+2026-06-15 14:16:30,265 - INFO - Aligned Feature Shape: (1, 10)
+2026-06-15 14:16:30,266 - INFO - STEP 5 - Feature Scaling Started
+2026-06-15 14:16:30,266 - INFO - Loading Scaler: D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\artifacts\encoders\GradientBoostingClassifier_scaler_20260615_141559.pkl
+2026-06-15 14:16:30,266 - INFO - Scaler Loaded Successfully
+2026-06-15 14:16:30,266 - INFO - Applying scaler on shape: (1, 10)
+2026-06-15 14:16:30,267 - INFO - Scaling Transformation Completed
+2026-06-15 14:16:30,268 - INFO - Scaling Completed. Shape=(1, 10)
+2026-06-15 14:16:30,268 - INFO - STEP 6 - Prediction Started
+2026-06-15 14:16:30,269 - INFO - Prediction started for model: GradientBoostingClassifier
+2026-06-15 14:16:30,269 - INFO - Input shape: (1, 10)
+2026-06-15 14:16:30,269 - INFO - Searching model: GradientBoostingClassifier
+2026-06-15 14:16:30,269 - INFO - Loading model from D:\MY_Learning\10+YRSLearning\PyWorkSpace\MLDSGenAI\models\trained_models\GradientBoostingClassifier_20260615_141559.pkl
+2026-06-15 14:16:30,395 - INFO - Model loaded successfully
+2026-06-15 14:16:30,397 - INFO - Prediction generated: [0]
+2026-06-15 14:16:30,398 - INFO - Prediction probabilities generated
+2026-06-15 14:16:30,398 - INFO - Prediction completed successfully
+2026-06-15 14:16:30,398 - INFO - Prediction Result: {'prediction': [0], 'probability': [[0.9965277333987563, 0.0034722666012436563]]}
+2026-06-15 14:16:30,398 - INFO - Inference Pipeline Completed Successfully

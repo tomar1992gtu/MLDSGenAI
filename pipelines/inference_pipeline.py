@@ -42,12 +42,21 @@ class InferencePipeline:
             #################################
             # STEP 3 Feature Engineering
             #################################
-            logger.info("STEP 3 - Feature Engineering Started")
             fe = FeatureEngineering()
             if self.categorical_columns:
-                logger.info(f"Categorical Columns: {self.categorical_columns}")
-                df = fe.transform_features(df=df, categorical_cols=self.categorical_columns, model_name=self.model_name)
-            logger.info(f"Feature Engineering Completed. Shape={df.shape}")
+                missing_cols = [
+                    col for col in self.categorical_columns
+                    if col not in df.columns
+                ]
+                if missing_cols:
+                    logger.warning(f"Skipping Feature Encoding. Missing columns: {missing_cols}")
+                else:
+                    logger.info(f"Applying Feature Encoding on: {self.categorical_columns}")
+                    df = fe.transform_features(
+                        df=df,
+                        categorical_cols=self.categorical_columns,
+                        model_name=self.model_name
+                    )
 
             #################################
             # STEP 4 Feature Alignment
