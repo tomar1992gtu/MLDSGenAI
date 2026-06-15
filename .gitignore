@@ -11,16 +11,10 @@ venv/
 .vscode/
 
 # Data
-data/raw/
-data/processed/
 
 # Models
-models/trained_models/
-models/encoders/
 
 # Artifacts
-artifacts/
-
 # OS
 .DS_Store
 Thumbs.db
