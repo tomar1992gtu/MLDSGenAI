@@ -371,7 +371,7 @@ Each training run automatically stores:
 Machine Learning | Data Science | Generative AI
 
 GitHub:
-https://github.com/gtu12tomar
+https://github.com/tomar1992gtu
 
 ---
 
