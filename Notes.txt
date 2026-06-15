@@ -178,10 +178,3 @@ Feature store
 RAG pipelines
 LLM fine-tuning
 Kubernetes deployment
-
-This churn project is already strong enough for:
-
-portfolio
-resume
-interviews
-intermediate ML engineering practice.
