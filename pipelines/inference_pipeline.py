@@ -4,6 +4,7 @@ import joblib
 import pandas as pd
 import yaml
 
+from src.logging.logger import logger
 from src.preprocessing.data_preprocessing import DataPreprocessing
 from src.feature_engineering.feature_engineering import FeatureEngineering
 from src.transformation.scaling import DataScaling
@@ -16,43 +17,68 @@ class InferencePipeline:
         self.model_name = model_name
         #categorical_columns = [col.lower() for col in config.get("feature_engineering", {}).get("categorical_columns", [])]
         self.categorical_columns = [col.lower() for col in (categorical_columns or [])]
+        logger.info(f"InferencePipeline Initialized | Model={model_name}")
 
     def run(self, input_data):
+        try:
+            logger.info("=====>>> Starting Inference Pipeline <<======")
+            #################################
+            # STEP 1 Convert input
+            #################################
+            logger.info("STEP 1 - Input Conversion Started")
+            if not isinstance(input_data, pd.DataFrame):
+                df = pd.DataFrame([input_data])
+            else:
+                df = input_data.copy()
+            logger.info(f"Input Shape: {df.shape}")
 
-        #################################
-        # STEP 1 Convert input
-        #################################
-        if not isinstance(input_data, pd.DataFrame):
-            df = pd.DataFrame([input_data])
-        else:
-            df = input_data.copy()
+            #################################
+            # STEP 2 Preprocessing
+            #################################
+            logger.info("STEP 2 - Data Preprocessing Started")
+            df = DataPreprocessing.preprocess(df)
+            logger.info(f"Preprocessing Completed. Shape={df.shape}")
 
-        #################################
-        # STEP 2 Preprocessing
-        #################################
-        df = DataPreprocessing.preprocess(df)
+            #################################
+            # STEP 3 Feature Engineering
+            #################################
+            logger.info("STEP 3 - Feature Engineering Started")
+            fe = FeatureEngineering()
+            if self.categorical_columns:
+                logger.info(f"Categorical Columns: {self.categorical_columns}")
+                df = fe.transform_features(df=df, categorical_cols=self.categorical_columns, model_name=self.model_name)
+            logger.info(f"Feature Engineering Completed. Shape={df.shape}")
 
-        #################################
-        # STEP 3 Feature Engineering
-        #################################
-        fe = FeatureEngineering()
-        if self.categorical_columns:
-            df = fe.transform_features(df=df, categorical_cols=self.categorical_columns, model_name=self.model_name)
+            #################################
+            # STEP 4 Feature Alignment
+            #################################
+            logger.info("STEP 4 - Feature Alignment Started")
+            feature_file = os.path.join(FEATURE_COLUMNS_DIR, f"{self.model_name}_feature_columns.pkl")
+            feature_columns = joblib.load(feature_file)
+            logger.info(f"Loaded Feature Columns File: {feature_file}")
+            df = df.reindex(columns=feature_columns, fill_value=0)
+            logger.info(f"Aligned Feature Shape: {df.shape}")
 
-        feature_columns = joblib.load(os.path.join(FEATURE_COLUMNS_DIR, f"{self.model_name}_feature_columns.pkl"))
-        df = df.reindex(columns=feature_columns, fill_value=0)
+            #################################
+            # STEP 5 Scaling
+            #################################
+            logger.info("STEP 5 - Feature Scaling Started")
+            DataScaling.load_latest_scaler(model_name=self.model_name)
+            df = DataScaling.transform(df)
+            logger.info(f"Scaling Completed. Shape={df.shape}")
 
-        #################################
-        # STEP 4 Scaling
-        #################################
-        DataScaling.load_latest_scaler(model_name=self.model_name)
-        df = DataScaling.transform(df)
+            #################################
+            # STEP 6 Prediction
+            #################################
+            logger.info("STEP 6 - Prediction Started")
+            prediction = PredictionPipeline.predict(data=df, model_name=self.model_name)
+            logger.info(f"Prediction Result: {prediction}")
+            logger.info("Inference Pipeline Completed Successfully")
+            return prediction
 
-        #################################
-        # STEP 5 Prediction
-        #################################
-        prediction = PredictionPipeline.predict(data=df, model_name=self.model_name)
-        return prediction
+        except Exception as e:
+            logger.exception(f"Inference Pipeline Failed: {str(e)}")
+            raise
 
 
 if __name__ == "__main__":

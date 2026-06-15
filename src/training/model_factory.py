@@ -34,6 +34,8 @@ from sklearn.naive_bayes import GaussianNB
 # -------------------------
 from xgboost import (XGBRegressor, XGBClassifier)
 
+from src.logging.logger import logger
+
 '''
 Purpose : Instead of manually creating models everywhere, create them from one centralized place.
 '''
@@ -80,29 +82,41 @@ class ModelFactory:
     @classmethod
     def get_model(cls, model_name: str, task_type: str = "classification", **kwargs):
 
-        # Select model group
-        if task_type.lower() == "classification":
-            models = cls.CLASSIFICATION_MODELS
-        elif task_type.lower() == "regression":
-            models = cls.REGRESSION_MODELS
-        else:
-            raise ValueError("task_type must be either 'classification' or 'regression'")
+        try:
+            logger.info(f"Creating Model | Name={model_name} | Task={task_type}")
+            logger.info(f"Hyperparameters={kwargs}")
 
-        # Validate model name
-        if model_name not in models:
-            raise ValueError(f"Unsupported model: {model_name}\n"
-                f"Available models: {list(models.keys())}"
-            )
+            # Select model group
+            if task_type.lower() == "classification":
+                models = cls.CLASSIFICATION_MODELS
+            elif task_type.lower() == "regression":
+                models = cls.REGRESSION_MODELS
+            else:
+                logger.error(f"Invalid task type: {task_type}")
+                raise ValueError("task_type must be either 'classification' or 'regression'")
 
-        # Create model instance
-        return models[model_name](**kwargs)
+            # Validate model name
+            if model_name not in models:
+                logger.error(f"Unsupported model: {model_name}")
+                raise ValueError(f"Unsupported model: {model_name}\n"
+                    f"Available models: {list(models.keys())}"
+                )
+
+            # Create model instance
+            model = models[model_name](**kwargs)
+            logger.info(f"Model Created Successfully: {model_name}")
+            return model
+
+        except Exception:
+            logger.exception("Model Creation Failed")
+            raise
 
     # =====================================
     # LIST AVAILABLE MODELS
     # =====================================
     @classmethod
     def list_models(cls):
-
+        logger.info("Listing available models")
         return {
             "classification": list(cls.CLASSIFICATION_MODELS.keys()),
             "regression": list(cls.REGRESSION_MODELS.keys())

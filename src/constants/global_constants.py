@@ -25,6 +25,7 @@ TRAINED_MODELS_DIR = os.path.join(MODELS_DIR, "trained_models")
 ARTIFACTS_DIR = os.path.join(PROJECT_ROOT, "artifacts")
 ARTIFACTS_ENCODER_DIR = os.path.join(ARTIFACTS_DIR, "encoders")
 ARTIFACTS_METRICS_DIR = os.path.join(ARTIFACTS_DIR, "metrics")
+ARTIFACTS_LOGS_DIR = os.path.join(ARTIFACTS_DIR, "logs")
 FEATURE_COLUMNS_DIR = os.path.join(ARTIFACTS_DIR, "feature_columns")
 
 # ==========================
